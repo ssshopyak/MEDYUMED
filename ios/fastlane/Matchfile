@@ -1,0 +1,4 @@
+git_url "https://gitlab.com/volga-volga/ios_cert.git"
+type "development"
+clone_branch_directly true
+git_branch "medyumed"

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27882576154",
+    "project_id": "med-you-med",
+    "storage_bucket": "med-you-med.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27882576154:android:2e9fda9df79ab71dbeb4a3",
+        "android_client_info": {
+          "package_name": "ru.medyumed.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27882576154-sksi5976glgvo6o8k94c0e2unrdeis98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpqd0jBqjeKUs7Z9b9qSbRCo2Zl9-EK3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27882576154-sksi5976glgvo6o8k94c0e2unrdeis98.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

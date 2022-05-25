@@ -1,0 +1,55 @@
+stages:
+  - lint
+  - deploy
+
+deploy_ios:
+  variables:
+    FASTLANE_SESSION: '---\n- !ruby/object:HTTP::Cookie\n  name: DES5eb0d366d2c501d96d8df2662a05b72ed\n  value: HSARMTKNSRVXWFlame++OR89iHpb6AiJPdMYRy33HlXhs90DNdX/Ym35hLsMWlDFiiC8wvlC7Ujv86sVi4r3+xvoqvpS9CdOioqO7oqQ0Y/Hdo1KAGmNthQPb2RaCc0C2vGEjfyA9drwZpeEzZYL1ORmZ1EPeXYQolNojHkXD6KZBG9uT92u2W9t6uX/ShnFbmHK8BUd3V8=SRVX\n  domain: idmsa.apple.com\n  for_domain: true\n  path: "/"\n  secure: true\n  httponly: true\n  expires:\n  max_age: 2592000\n  created_at: 2021-11-30 17:51:50.442606000 +03:00\n  accessed_at: 2021-12-02 12:56:48.622332000 +03:00\n- !ruby/object:HTTP::Cookie\n  name: myacinfo\n  value: DAWTKNV323952cf8084a204fb20ab2508441a07d02d354b981264ccfec69661ee5897da6279f4cd0e3350e0310a6e28a77c6e6d234406342e9872229220bb9bf4934ccb4c167d246b6de56796939e20f3e43dda011e048adb519d792f6e2fff1c7e40ef0d10a60c22f90742fd13067771f97eecebf1a8d11ef5f4618ab47dd400238ac364ee32bb7a1adcb04d632b872b3e048552d78eeeaa84d8dde212b4baab656c09dae75d35fc50bb06f44bb0905f17cd6542300648ebee0515de0a73fe578d66c2fc9a0467a98c9440144c891543946dc29cbbe556c3860dbb9bed5fd7a40df3730d1ded32cef3fd7e784aba2d2269d13c78a15994c1c39738e4376902c8de9634c1c335d4b55fdfc72462a3e6898f395ca90fe9f70d5c02dd7581655d378f74b51e11c77fd9dd2f4b0019ba1eb6db6b7a8414741a494311c86a9ccb3f8a77bfbc483be08d34447d201fa63266f1198ab58b797a1b6f9bfe7e9c81a4042a856d762d1af585a47V3\n  domain: apple.com\n  for_domain: true\n  path: "/"\n  secure: true\n  httponly: true\n  expires:\n  max_age:\n  created_at: 2021-12-02 12:56:49.962505000 +03:00\n  accessed_at: 2021-12-02 12:56:49.963343000 +03:00\n- !ruby/object:HTTP::Cookie\n  name: dqsid\n  value: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg0MzkwMTAsImp0aSI6InpTYkRyOGRYQkRwVVlUM29ndTZZZkEifQ.dG3j4Tqg_aR2G4bRJFtZMIONwm-h6sbjGVnf1g_H9z0\n  domain: appstoreconnect.apple.com\n  for_domain: false\n  path: "/"\n  secure: true\n  httponly: true\n  expires:\n  max_age: 1800\n  created_at: &1 2021-12-02 12:56:50.659938000 +03:00\n  accessed_at: *1\n'
+  stage: deploy
+  only:
+    - master
+  script:
+    - yarn
+    - cd ios
+    - pod install
+    - bundle install
+    - bundle exec fastlane deploy
+  tags:
+    - fastlane
+
+lint:
+  stage: lint
+  except:
+    - master
+  script:
+    - yarn
+    - yarn lint
+  tags:
+    - fastlane
+
+deploy_apk:
+  stage: deploy
+  only:
+    - master
+  script:
+    - yarn
+    - yarn jetifier
+    - cd android
+    - bundle install
+    - bundle exec fastlane deployApk
+  tags:
+    - fastlane
+
+deploy_bundle:
+  stage: deploy
+  when: manual
+  only:
+    - master
+  script:
+    - yarn
+    - yarn jetifier
+    - cd android
+    - bundle install
+    - bundle exec fastlane deployBundle
+  tags:
+    - fastlane

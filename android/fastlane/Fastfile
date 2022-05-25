@@ -1,0 +1,18 @@
+fastlane_require 'json'
+
+default_platform :android
+
+platform :android do
+
+	lane :deployApk do
+        gradle(task: "clean assembleRelease")
+        outputJson = JSON.parse File.open("../app/build/outputs/apk/release/output.json", "rb").read
+        sh "curl http://android-ci.vvdev.ru/file?project=medyumed -F file=@\"../app/build/outputs/apk/release/#{outputJson[0]["path"]}\""
+	end
+
+	lane :deployBundle do
+        gradle(task: "clean bundleRelease")
+        sh "curl http://android-ci.vvdev.ru/file?project=medyumed -F file=@\"../app/build/outputs/bundle/release/app-release.aab\""
+	end
+
+end

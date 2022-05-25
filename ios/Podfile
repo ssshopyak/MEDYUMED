@@ -1,0 +1,31 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '11.0'
+
+target 'MedYuMed' do
+  config = use_native_modules!
+
+  use_react_native!(:path => config["reactNativePath"])
+
+pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
+
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
+
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+
+  target 'MedYuMedTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+end
+
+target 'MedYuMed-tvOS' do
+  # Pods for MedYuMed-tvOS
+
+  target 'MedYuMed-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
